@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Club Membership Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Black background */
+            color: #fff; /* White font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #fff;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select {
+            width: calc(100% - 20px); /* Adjust width to account for padding */
+            padding: 12px 10px;
+            border: 1px solid #f9e3e6; /* Pale pastel pink border */
+            background-color: rgba(0, 0, 0, 0); /* Transparent background */
+            color: #fff; /* White text input */
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        input::placeholder {
+            color: #888; /* Grey placeholder text */
+        }
+        select {
+            appearance: none; /* Remove default select arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;           
+            background-position: right 10px top 50%;
+            background-size: 18px;
+        }
+        select option {
+            background-color: #1a1a1a; /* Background for dropdown options */
+            color: #fff; /* Text color for dropdown options */
+        }
+        input[type="submit"] {
+            background-color: #f9e3e6; /* Pale pastel pink for submit button */
+            color: #000; /* Black text for submit button */
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #f0c9d0; /* Slightly darker pink on hover */
+        }
+        .name-fields {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .name-fields div {
+            flex: 1;
+        }
+        /* Style for required fields indicator */
+        label.required::after {
+            content: " *";
+            color: #f9e3e6; /* Pink asterisk */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Club Membership Form</h1>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label class="required">Full Name:</label>
+                <div class="name-fields">
+                    <div>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                    </div>
+                    <div>
+                        <input type="text" id="middleName" name="middleName" placeholder="Middle Name">
+                    </div>
+                    <div>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="required">Email ID:</label>
+                <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dob" class="required">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country of Residence:</label>
+                <select id="country" name="country">
+                    <option value="">Select your country</option>
+                    <option value="USA">United States</option>
+                    <option value="CAN">Canada</option>
+                    <option value="GBR">United Kingdom</option>
+                    <option value="IND">India</option>
+                    <option value="AUS">Australia</option>
+                    <option value="NZL">New Zealand</option>
+                    <option value="OTH">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="trope">Preferred Trope (select your fav one!):</label>
+                <select id="trope" name="trope[]" multiple size="6">
+                    <option value="dystopian">Dystopian</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="self-help">Self-Help</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="cookbooks">Cookbooks</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="romance">Romance</option>
+                    <option value="sci-fi">Science Fiction</option>
+                    <option value="mystery">Mystery</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Join Bookish Boulevard">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

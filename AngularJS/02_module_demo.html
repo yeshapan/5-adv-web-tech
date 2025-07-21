@@ -1,0 +1,17 @@
+<!--program to demonstrate use of module in AngularJS-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First Demo Program for Module</title>
+    <!--import CDN for AngularJS library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+        //define an AngularJS module named "sample_module"
+        angular.module("sample_module",[]);
+    </script>
+</head>
+<body ng-app="sample_module">
+    <!--display the sum of two numbers using AngularJS expression binding-->
+    sum of two numbers {10+20} is {{10+20}}
+</body>
+</html>

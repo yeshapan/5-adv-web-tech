@@ -1,0 +1,22 @@
+<!--Program to demonstrate ng-show and ng-hide directives-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo program for ng-show and ng-hide directives</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script>
+        var app = angular.module("sampleApp", []);
+    </script>
+</head>
+<body ng-app="sampleApp">
+    <div ng-init="isVisible = true">
+        <label>
+            <input type="checkbox" ng-model="isVisible">
+            Show Message
+        </label>
+
+        <p ng-show="isVisible">This message is shown using <strong>ng-show</strong>.</p>
+        <p ng-hide="isVisible">This message is shown using <strong>ng-hide</strong>.</p>
+    </div>
+</body>
+</html>

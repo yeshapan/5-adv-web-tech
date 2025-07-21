@@ -1,0 +1,20 @@
+<!--Program to give demo of controllers in ANgularJS-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>First Demo Program for Intro to Controllers</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script type="text/javascript">
+            //define Angular module and controller
+            var app = angular.module("sample", []);
+            app.controller("emp", function($scope) {
+                $scope.Name = "Tasha";
+            });
+        </script>
+    </head>
+    <body ng-app="sample">
+        <div ng-controller="emp">
+            <h1>Hello {{Name}}</h1>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!--Program to demonstrate ng-click directive in ANgularJS-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ng-click Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body ng-app="clickApp">
+    <div ng-controller="ClickController">
+      <h2>ng-click Example</h2>
+      <p>Button clicked: {{ count }} times</p>
+      <button ng-click="increment()">Click Me!</button>
+    </div>
+
+    <script>
+      var app = angular.module('clickApp', []);
+
+      app.controller('ClickController', function($scope) {
+        $scope.count = 0;
+
+        $scope.increment = function() {
+          $scope.count++;
+        };
+      });
+    </script>
+  </body>
+</html>

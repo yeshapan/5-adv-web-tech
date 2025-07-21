@@ -1,0 +1,31 @@
+<!--Program for intro to directives in ANgularJS-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo Program for Intro to Directives</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("sampleApp", []);
+    </script>
+</head>
+<body ng-app="sampleApp">
+    <div ng-init="num1=12; num2=34; emp={empid, empname}">
+        <span>
+            Value of num1 is: {{num1}}<br>
+            Value of num2 is: {{num2}}<br>
+        </span>
+        <span>
+            Sum of num1 and num2 is: {{num1 + num2}}<br>
+        </span>
+        <span>
+            Employee ID: <input type="text" ng-model="emp.empid" /><br>
+        </span>
+        <span>
+            Employee Name: <input type="text" ng-model="emp.empname" /><br>
+        </span>
+        <span>
+            You entered:<br> ID: {{emp.empid}} <br> Name: {{emp.empname}}
+        </span>
+    </div>
+</body>
+</html>

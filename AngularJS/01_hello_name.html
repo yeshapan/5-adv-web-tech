@@ -1,0 +1,16 @@
+<!--Program to take name from user and bind and print it with "Hello"-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First JS Program</title>
+    <!--import CDN for AngularJS library-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="">
+        Enter your name: <input type="text" ng-model="name">
+        <!-- Bind the user input and print it -->
+        <p>Hello <span ng-bind="name"></span></p>
+    </div>
+</body>
+</html>

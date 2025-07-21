@@ -1,0 +1,33 @@
+<!--Program to demonstrate scope inheritance-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo program for scope inheritance</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  </head>
+  <body ng-app="inheritanceApp">
+    <div ng-controller="ParentController">
+      <h2>Parent Controller</h2>
+      <p>Parent Message: {{ message }}</p>
+
+      <div ng-controller="ChildController">
+        <h3>Child Controller</h3>
+        <p>Inherited Message: {{ message }}</p>
+        <p>Child's Own Message: {{ childMessage }}</p>
+      </div>
+    </div>
+
+    <script>
+      var app = angular.module('inheritanceApp', []);
+
+      app.controller('ParentController', function($scope) {
+        $scope.message = "Hello from Parent!";
+      });
+
+      app.controller('ChildController', function($scope) {
+        // Inherits message from ParentController
+        $scope.childMessage = "Hello from Child!";
+      });
+    </script>
+  </body>
+</html>

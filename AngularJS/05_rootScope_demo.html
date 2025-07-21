@@ -1,0 +1,37 @@
+<!--Program to demonstrate rootScope-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>First Demo Program for RootScope</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script type="text/javascript">
+            var app = angular.module("sampleApp", []);
+            app.controller("controller1",  function($scope, $rootScope){
+                $scope.name="Feyre Archeron";
+                $rootScope.msg1="Feyre is the High Lady of Night COurt";
+                $scope.test="Scope Test for Feyre";
+            });
+            app.controller("controller2", function($scope, $rootScope){
+                $scope.name="Nesta Archeron";
+                $rootScope.msg2="Nesta is also known as Lady Death";
+                $scope.test="Scope Test for Nesta";
+            });
+        </script>
+    </head>
+    <body ng-app="sampleApp">
+        <div ng-controller="controller1">
+            {{name}}
+            <br>
+            {{msg2}}
+            <br>
+            {{test}}
+        </div>
+        <div ng-controller="controller2">
+            {{name}}
+            <br>
+            {{msg1}}
+            <br>
+            {{test}}
+        </div>
+    </body>
+</html>
