@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>AngularJS Constant Example</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script type="text/javascript">
+            // 1. Define the AngularJS module
+            var app = angular.module("myapp", []);
+
+            // 2. Define a constant to hold a non-changing value
+            app.constant("myapplication", "mobileapplication");
+            
+            // 3. Define a controller and inject the constant
+            app.controller("mycontroller", function($scope, myapplication) {
+                // Assign the constant's value to a scope variable for the view to access
+                $scope.appName = myapplication;
+            });
+    </script>
+    </head>
+    <body ng-app="myapp">
+       <div ng-controller="mycontroller">
+        Hello {{appName}}
+       </div>
+    </body>
+</html>

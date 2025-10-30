@@ -21,12 +21,12 @@
       var app = angular.module('inheritanceApp', []);
 
       app.controller('ParentController', function($scope) {
-        $scope.message = "Hello from Parent!";
+        $scope.message = "Inside parent controller";
       });
 
       app.controller('ChildController', function($scope) {
         // Inherits message from ParentController
-        $scope.childMessage = "Hello from Child!";
+        $scope.childMessage = "Inside child controller";
       });
     </script>
   </body>

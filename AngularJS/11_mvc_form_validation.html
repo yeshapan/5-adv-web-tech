@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVC with Validation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #messageArea {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            text-align: left;
+        }
+        .error ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>MVC Registration Form</h1>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Must be 8+ characters">
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <div id="messageArea"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /**
+             * The Model
+             * Manages the application data and business logic (validation).
+             * It has no knowledge of the HTML or View.
+             */
+            const UserModel = {
+                // The validate method contains the business logic
+                validate: function(data) {
+                    const errors = [];
+
+                    if (!data.name || data.name.trim().length === 0) {
+                        errors.push("Name is required.");
+                    }
+
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!data.email || !emailRegex.test(data.email)) {
+                        errors.push("A valid email is required.");
+                    }
+
+                    if (!data.password || data.password.length < 8) {
+                        errors.push("Password must be at least 8 characters long.");
+                    }
+                    
+                    return {
+                        isValid: errors.length === 0,
+                        errors: errors
+                    };
+                }
+            };
+
+            /**
+             * The View
+             * Manages all the DOM elements and interactions.
+             * It gets data from the form and displays messages, but doesn't process data.
+             */
+            const UserView = {
+                // Store references to DOM elements
+                form: document.getElementById('registrationForm'),
+                nameInput: document.getElementById('name'),
+                emailInput: document.getElementById('email'),
+                passwordInput: document.getElementById('password'),
+                messageArea: document.getElementById('messageArea'),
+
+                // Get data from the form inputs
+                getFormData: function() {
+                    return {
+                        name: this.nameInput.value,
+                        email: this.emailInput.value,
+                        password: this.passwordInput.value
+                    };
+                },
+
+                // Display success or error messages
+                displayMessage: function(status, messages) {
+                    this.messageArea.className = status; // 'success' or 'error'
+                    if (status === 'success') {
+                        this.messageArea.textContent = messages[0];
+                    } else {
+                        // Create a list for multiple error messages
+                        let html = '<ul>';
+                        messages.forEach(msg => {
+                            html += `<li>${msg}</li>`;
+                        });
+                        html += '</ul>';
+                        this.messageArea.innerHTML = html;
+                    }
+                },
+                
+                // Clear any displayed messages
+                clearMessage: function() {
+                    this.messageArea.textContent = '';
+                    this.messageArea.className = '';
+                },
+
+                // Reset the form fields
+                resetForm: function() {
+                    this.form.reset();
+                }
+            };
+
+            /**
+             * The Controller
+             * Connects the Model and the View.
+             * It listens for user actions (like form submission), tells the Model
+             * to process data, and then tells the View how to update.
+             */
+            const UserController = {
+                init: function() {
+                    // Bind the form's submit event to the handler
+                    UserView.form.addEventListener('submit', this.handleSubmit.bind(this));
+                },
+
+                // The handler for the form submission
+                handleSubmit: function(event) {
+                    event.preventDefault(); // Stop the default form submission
+                    UserView.clearMessage();
+
+                    // 1. Get data from the View
+                    const formData = UserView.getFormData();
+
+                    // 2. Ask the Model to validate the data
+                    const validationResult = UserModel.validate(formData);
+
+                    // 3. Tell the View what to display based on the validation result
+                    if (validationResult.isValid) {
+                        UserView.displayMessage('success', ['Registration successful!']);
+                        UserView.resetForm();
+                    } else {
+                        UserView.displayMessage('error', validationResult.errors);
+                    }
+                }
+            };
+
+            // Initialize the application
+            UserController.init();
+
+        });
+    </script>
+</body>
+</html>

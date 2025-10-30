@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>AngularJS Service</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script type="text/javascript">
+            // 1. Create the Angular module
+            var app = angular.module("myapp", []);
+
+            // 2. Create the service
+            // 'app.service' creates a reusable singleton object.
+            // AngularJS handles creating and returning 'this' automatically.
+            app.service("myservice", function() {
+                this.getname = function() {
+                    return "this is Angular Js";
+                }
+            });
+
+            // 3. Create the controller and inject the service
+            app.controller("mycontroller", function($scope, myservice) {
+                // Use the service to get data and attach it to the scope
+                $scope.msg = myservice.getname();
+            });
+    </script>
+    </head>
+    <body ng-app="myapp">
+       <div ng-controller="mycontroller">
+        Hello {{msg}}
+       </div>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+    <h2>ng-change Example</h2>
+
+    <label>
+        <input type="checkbox" ng-model="myCheckbox" ng-change="showStatus()">
+        Toggle this checkbox
+    </label>
+    
+    <p>Checkbox status: {{ status }}</p>
+
+    <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.status = "Unchecked";
+        $scope.showStatus = function() {
+            if ($scope.myCheckbox) {
+                $scope.status = "Checked";
+            } else {
+                $scope.status = "Unchecked";
+            }
+        };
+    });
+    </script>
+
+</body>
+</html>

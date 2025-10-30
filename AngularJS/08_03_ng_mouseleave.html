@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+
+    <h2>ng-mouseleave Example</h2>
+    
+    <div ng-mouseleave="resetMessage()" style="padding: 20px; border: 1px solid black; background-color: lightcoral;">
+        Hover over this area and then leave.
+    </div>
+    
+    <p>{{ message }}</p>
+
+    <script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.message = "Status: Outside the div.";
+        $scope.resetMessage = function() {
+            $scope.message = "Status: You left the div!";
+        };
+    });
+    </script>
+
+</body>
+</html>
