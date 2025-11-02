@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>$interval Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+    <h2>$interval Service Example</h2>
+    
+    <h1>Counter: {{ counter }}</h1>
+    
+    <button ng-click="startInterval()" ng-disabled="intervalPromise">Start</button>
+    <button ng-click="stopInterval()" ng-enabled="intervalPromise">Stop</button>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $interval) {
+            
+            $scope.counter = 0;
+            var intervalPromise; // To store the promise returned by $interval
+
+            $scope.startInterval = function() {
+                // Check if interval is not already running
+                if (!intervalPromise) {
+                    // $interval is Angular's wrapper for setInterval
+                    // It automatically triggers $digest cycles
+                    intervalPromise = $interval(function() {
+                        $scope.counter++;
+                    }, 1000); // 1000 milliseconds = 1 second
+                }
+            };
+
+            $scope.stopInterval = function() {
+                //use $interval.cancel to stop it
+                if (intervalPromise) {
+                    $interval.cancel(intervalPromise);
+                    intervalPromise = null; //clear the promise
+                }
+            };
+
+            //IMPORTANT: Always cancel intervals when the scope is destroyed to prevent memory leaks
+            $scope.$on('$destroy', function() {
+                $scope.stopInterval();
+            });
+
+        });
+    </script>
+
+</body>
+</html>

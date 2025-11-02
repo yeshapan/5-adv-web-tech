@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>$timeout Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+    <h2>$timeout Service Example</h2>
+    
+    <button ng-click="runTimeout()">Run Timeout</button>
+    
+    <h3>{{ message }}</h3>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $timeout) {
+            
+            $scope.message = 'Click the button to see a message after 2 seconds.';
+
+            $scope.runTimeout = function() {
+                $scope.message = 'Waiting...';
+                
+                //$timeout is Angular's wrapper for setTimeout
+                //it automatically triggers a $digest cycle
+                $timeout(function() {
+                    $scope.message = 'Hello from the timeout!';
+                }, 2000); // 2000 milliseconds = 2 seconds
+            };
+
+        });
+    </script>
+
+</body>
+</html>

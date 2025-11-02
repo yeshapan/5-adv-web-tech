@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>AngularJS .service() Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+    <div class="container">
+        <h1>.service() Demo</h1>        
+        <p>Message: {{ message }}</p>
+        <p>Greeting: {{ greeting }}</p>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+
+        //create a .service()
+        //service is a *constructor function*. 
+        //AngularJS instantiates it with 'new'.
+        //add properties and methods to 'this'.
+        app.service('myService', function() {
+            
+            this.message = "This message comes from myService!";
+            
+            this.greet = function(name) {
+                return "Hi, " + name + "! (from service)";
+            };
+            
+            //no 'return' is needed
+        });
+
+        //create a controller and inject the service
+        app.controller('myCtrl', function($scope, myService) {
+            $scope.message = myService.message;
+            $scope.greeting = myService.greet('AngularJS');
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>$location Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+    <h2>$location Service Example</h2>
+    <p>Watch the URL bar in your browser.</p>
+
+    <h3>Current URL Info:</h3>
+    <ul>
+        <li><b>Full URL:</b> <code>{{ fullUrl }}</code></li>
+        <li><b>Path:</b> <code>{{ path }}</code></li>
+        <li><b>Hash:</b> <code>{{ hash }}</code></li>
+    </ul>
+
+    <h3>Change Location:</h3>
+    <button ng-click="changePath()">Change Path to /profile</button>
+    <button ng-click="addHash()">Add Hash #details</button>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $location) {
+            
+            //function to read current location properties
+            function updateLocationInfo() {
+                $scope.fullUrl = $location.absUrl();
+                $scope.path = $location.path();
+                $scope.hash = $location.hash();
+            }
+
+            //initial load
+            updateLocationInfo();
+
+            //function to change the path
+            $scope.changePath = function() {
+                $location.path('/profile');
+            };
+
+            //function to change the hash
+            $scope.addHash = function() {
+                $location.hash('details');
+            };
+
+            //watch for location changes (e.g., using back/forward buttons)
+            $scope.$on('$locationChangeSuccess', function() {
+                updateLocationInfo();
+            });
+
+        });
+    </script>
+
+</body>
+</html>

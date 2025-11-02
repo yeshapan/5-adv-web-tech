@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>    
+    <title>AngularJS .factory() Demo</title>    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>    
+</head>
+<body ng-controller="myCtrl">
+    <div class="container">
+        <h1>.factory() Demo</h1>        
+        
+        <p>Message: {{ message }}</p>
+        <p>Greeting: {{ greeting }}</p>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        //A factory is a function that *returns an object*.
+        app.factory('myFactory', function() {
+            //create the service object
+            var factoryObject = {};
+            //add properties and methods to the object
+            factoryObject.message = "This message comes from myFactory!";
+
+            factoryObject.greet = function(name) {
+                return "Hello, " + name + "! (from factory)";
+            };
+
+            //return the object
+            return factoryObject;
+        });
+
+        //create a controller and inject the factory
+        app.controller('myCtrl', function($scope, myFactory) {
+            //use the factory's properties and methods
+            $scope.message = myFactory.message;
+            $scope.greeting = myFactory.greet('World');
+        });
+    </script>
+</body>
+</html>

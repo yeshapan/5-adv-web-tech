@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>$log Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body ng-controller="myCtrl">
+
+    <h2>$log Service Example</h2>
+    <p>Open your browser's console (F12) to see the log messages.</p>
+    <button ng-click="showLogs()">Test Logs</button>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function($scope, $log) {
+            
+            $scope.showLogs = function() {
+                //log different types of messages
+                $log.log('This is a $log.log message.');
+                $log.info('This is a $log.info message.');
+                $log.warn('This is a $log.warn message.');
+                $log.error('This is a $log.error message.');
+                $log.debug('This is a $log.debug message (may not show unless verbose logging is on).');
+            };
+            
+            //initial log on controller load
+            $log.info('Log Controller Loaded.');
+        });
+    </script>
+
+</body>
+</html>
