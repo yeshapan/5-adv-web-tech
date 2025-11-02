@@ -1,0 +1,18 @@
+html>
+    <head>
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script type="text/javascript">
+        var app = angular.module("sample",[]);
+            app.controller("emp",function($scope) {
+                $scope.Name="mukti";
+            });
+            
+    </script>
+    </head>
+    <body ng-app="sample">
+       <div ng-controller ="emp">
+       <h1>Hello {{Name}}</h1> 
+       </div>
+    </body>
+</html>

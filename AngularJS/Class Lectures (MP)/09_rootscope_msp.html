@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script type="text/javascript">
+        var app = angular.module("sample",[]);
+            app.controller("controller1",function($scope,$rootScope) {
+                $scope.name="mukti1";
+                $rootScope.msg1="Hi c1";
+                $scope.test="m4";
+                });
+            app.controller("controller2",function($scope,$rootScope) {
+                $scope.name="mukti2";
+                $rootScope.msg2="Hi c2";
+                });
+            
+    </script>
+    </head>
+    <body ng-app="sample">
+       <div ng-controller ="controller1">
+       {{name}}
+       <br>
+       {{msg2}}
+       {{test}}
+
+       </div>
+       <br>
+       <div ng-controller ="controller2">
+        {{name}}
+        {{msg1}}
+        <br>
+        {{test}}
+       </div>
+    </body>
+</html>
